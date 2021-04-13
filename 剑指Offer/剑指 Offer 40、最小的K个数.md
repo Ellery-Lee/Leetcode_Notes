@@ -24,7 +24,7 @@ class Solution {
         //pivot参考值，这里选取第一个元素
         int pivotValue = arr[low];
         while(left < right){
-            //右指针左移
+            //右指针左移,这里必须先判断右指针，这样能保证跳出的时候左指针是指向小于等于pivot的值(因为pivot取的时最左边的，如果时最右边就先判断左指针)
             while(left < right && arr[right] >= pivotValue){
                 right--;
             }
