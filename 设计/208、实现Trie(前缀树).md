@@ -1,6 +1,6 @@
 # 208、实现Trie(前缀树)
 
-- ###Trie树讲解：https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/shi-xian-trie-qian-zhui-shu-by-leetcode/
+- Trie树讲解：https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/trie-tree-de-shi-xian-gua-he-chu-xue-zhe-by-huwt/
 
 - 题目要求：实现一个 Trie (前缀树)，包含 `insert`, `search`, 和 `startsWith` 这三个操作。
 
@@ -22,22 +22,25 @@
 ```java
 class Trie {
     private Trie[] next;
-    private boolean isEnd = false;
+    private boolean isEnd;
     /** Initialize your data structure here. */
     public Trie() {
+        //一次建树，多次查询
         next = new Trie[26];
+        isEnd = false;
     }
     
     /** Inserts a word into the trie. */
     public void insert(String word) {
         Trie temp = this;
         for(int i = 0; i < word.length(); i++){
-            char currentchar = word.charAt(i);
-            if(temp.next[currentchar - 'a'] == null){
-                temp.next[currentchar - 'a'] = new Trie();
+            char currentChar = word.charAt(i);
+            if(temp.next[currentChar - 'a'] == null){
+                temp.next[currentChar - 'a'] = new Trie();
             }
-            temp = temp.next[currentchar - 'a'];
+            temp = temp.next[currentChar - 'a'];
         }
+        //字符串结束
         temp.isEnd = true;
     }
     
@@ -45,11 +48,11 @@ class Trie {
     public boolean search(String word) {
         Trie temp = this;
         for(int i = 0; i < word.length(); i++){
-            char currentchar = word.charAt(i);
-            if(temp.next[currentchar - 'a'] == null){
+            char currentChar = word.charAt(i);
+            if(temp.next[currentChar - 'a'] == null){
                 return false;
             }
-            temp = temp.next[currentchar - 'a'];
+            temp = temp.next[currentChar - 'a'];
         }
         return temp.isEnd;
     }
@@ -58,11 +61,11 @@ class Trie {
     public boolean startsWith(String prefix) {
         Trie temp = this;
         for(int i = 0; i < prefix.length(); i++){
-            char currentchar = prefix.charAt(i);
-            if(temp.next[currentchar - 'a'] == null){
+            char currentChar = prefix.charAt(i);
+            if(temp.next[currentChar - 'a'] == null){
                 return false;
             }
-            temp = temp.next[currentchar - 'a'];
+            temp = temp.next[currentChar - 'a'];
         }
         return true;
     }
